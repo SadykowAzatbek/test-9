@@ -18,11 +18,9 @@ const FinanceForm = () => {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const now = new Date();
-    const createdAt = now.toISOString();
-
-    await dispatch(fetchTransactionPost());
-    await dispatch(addDate(createdAt));
+    if (await dispatch(fetchTransactionPost())) {
+      dispatch(addDate());
+    }
 
     dispatch(cleanTransaction());
 
@@ -81,6 +79,7 @@ const FinanceForm = () => {
             <option>food</option>
             <option>drink</option>
             <option>taxes</option>
+            <option>products</option>
           </select>
         )}
         <input id="amount" name="amount" type="number" required

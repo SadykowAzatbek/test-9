@@ -26,8 +26,9 @@ export const transactionSlice = createSlice({
       state.category = value.category;
       state.amount = value.amount;
     },
-    addDate: (state, {payload}: PayloadAction<string>) => {
-      state.date = payload;
+    addDate: (state) => {
+      const now = new Date();
+      state.date = now.toISOString();
     },
     cleanTransaction: (state) => {
       state.type = '';

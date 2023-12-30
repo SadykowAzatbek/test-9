@@ -11,3 +11,23 @@ export const fetchTransactionPost = createAsyncThunk<void, undefined, {state: Ro
     await axiosApi.post<transaction>('transactions.json', data);
   },
 );
+
+export const fetchGetTransactions = createAsyncThunk<transaction[]>(
+  'transactions/get',
+  async () => {
+    const response = await axiosApi.get<{[key: string]: transaction}>('transactions.json');
+    const items = response.data;
+
+    if (!items) {
+      return[];
+    }
+
+    return Object.keys(items).map((key) => {
+      const item = items[key];
+      return {
+        ...item,
+        id: key,
+      };
+    });
+  },
+);
