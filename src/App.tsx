@@ -25,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/add" element={<FinanceForm />} />
+          <Route path="/:id/edit" element={<FinanceForm />} />
           <Route path="/categories" element={<Categories />} />
         </Routes>
       </main>
