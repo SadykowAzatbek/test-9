@@ -4,13 +4,13 @@ import {RootState} from "../../App/store";
 export interface category {
   id: string;
   name: string;
-  type: string;
+  category: string;
 }
 
 const initialState: category = {
   id: '',
   name: '',
-  type: '',
+  category: '',
 };
 
 export const categorySlice = createSlice({
@@ -19,11 +19,11 @@ export const categorySlice = createSlice({
   reducers: {
     addCategory: (state, {payload}: PayloadAction<category>) => {
       state.name = payload.name;
-      state.type = payload.type;
+      state.category = payload.category;
     },
     cleanCategory: (state) => {
       state.name = '';
-      state.type = '';
+      state.category = '';
     }
   },
 });
