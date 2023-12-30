@@ -2,11 +2,13 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../../App/store";
 
 export interface category {
+  id: string;
   name: string;
   type: string;
 }
 
 const initialState: category = {
+  id: '',
   name: '',
   type: '',
 };

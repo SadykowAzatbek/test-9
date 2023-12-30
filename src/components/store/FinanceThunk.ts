@@ -2,6 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {RootState} from '../../App/store';
 import axiosApi from '../../axiosApi';
 import {transaction} from './transactionSlice';
+import {category} from "./categorySlice";
 
 export const fetchTransactionPost = createAsyncThunk<void, undefined, {state: RootState}>(
   'transaction/post',
@@ -67,5 +68,32 @@ export const fetchCategoryPost = createAsyncThunk<void, undefined, {state: RootS
     const data = thunkAPI.getState().category;
 
     await axiosApi.post<transaction>('category.json', data);
+  },
+);
+
+export const fetchGetCategories = createAsyncThunk<category[]>(
+  'categories/get',
+  async () => {
+    const response = await axiosApi.get<{[key: string]: category}>('category.json');
+    const items = response.data;
+
+    if (!items) {
+      return [];
+    }
+
+    return Object.keys(items).map((key) => {
+      const item = items[key];
+      return {
+        ...item,
+        id: key,
+      };
+    });
+  },
+);
+
+export const deleteOneCategory = createAsyncThunk<void, string>(
+  'category/delete',
+  async (id) => {
+    await axiosApi.delete<category>('category/' + id + '.json');
   },
 );
