@@ -60,3 +60,12 @@ export const fetchEditDish = createAsyncThunk<void, string, {state: RootState}>(
     await axiosApi.put('transactions/' + id + '.json', data);
   },
 );
+
+export const fetchCategoryPost = createAsyncThunk<void, undefined, {state: RootState}>(
+  'category/post',
+  async (_, thunkAPI) => {
+    const data = thunkAPI.getState().category;
+
+    await axiosApi.post<transaction>('category.json', data);
+  },
+);

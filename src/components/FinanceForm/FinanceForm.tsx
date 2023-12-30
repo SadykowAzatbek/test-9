@@ -3,7 +3,8 @@ import {useAppDispatch, useAppSelector} from '../../App/hooks';
 import {addDate, addTransaction, cleanTransaction, selectorTransaction} from '../store/transactionSlice';
 import {fetchEditDish, fetchOneTransaction, fetchTransactionPost} from '../store/FinanceThunk';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
-import {selectOneTransaction} from "../store/transactionsSlice";
+import {selectOneLoading, selectOneTransaction} from "../store/transactionsSlice";
+import Loader from "../Loader/Loader";
 
 const FinanceForm = () => {
   const navigate = useNavigate();
@@ -12,8 +13,8 @@ const FinanceForm = () => {
 
   const dispatch = useAppDispatch();
   const transactionData = useAppSelector(selectorTransaction);
-
   const transaction = useAppSelector(selectOneTransaction);
+  const oneLoading = useAppSelector(selectOneLoading);
 
   useEffect(() => {
     const fetchUrl = async () => {
@@ -126,7 +127,7 @@ const FinanceForm = () => {
               cancel
             </button>
             <button className="btn btn-primary" type="submit">
-              {id ? 'Save' : 'Add'}
+              {oneLoading ? <Loader /> : id ? 'Save' : 'Add'}
             </button>
           </div>
         </form>

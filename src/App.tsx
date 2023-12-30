@@ -3,6 +3,7 @@ import {NavLink, Route, Routes, useNavigate} from 'react-router-dom';
 import Home from './components/Home/Home';
 import FinanceForm from './components/FinanceForm/FinanceForm';
 import Categories from './components/Categories/Categories';
+import CategoriesForm from "./components/FinanceForm/CategoriesForm";
 
 function App() {
   const navigate = useNavigate();
@@ -27,6 +28,8 @@ function App() {
           <Route path="/add" element={<FinanceForm />} />
           <Route path="/:id/edit" element={<FinanceForm />} />
           <Route path="/categories" element={<Categories />} />
+          <Route path="/categories/new" element={<CategoriesForm />} />
+          <Route path="*" element={<h2>Not Found!</h2>} />
         </Routes>
       </main>
     </>
